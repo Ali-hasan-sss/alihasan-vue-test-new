@@ -17,31 +17,6 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2>Featured Products</h2>
-          <div class="row">
-            <div class="col-md-4" v-for="product in products" :key="product.id">
-              <router-link :to="`/product/${product.id}`">
-                <div class="card mb-4">
-                  <img
-                    :src="product.image"
-                    class="card-img-top"
-                    alt="Product Image"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title">{{ product.title }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
-                    <p class="card-text">${{ product.price }}</p>
-                  </div>
-                </div>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
