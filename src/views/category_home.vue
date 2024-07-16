@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div class="col-12 mb-4 category">
+    <div v-if="hasError" class="alert alert-danger" role="alert">
+      cant fitch product check your conect
+    </div>
+    <div v-else class="col-12 mb-4 category">
       <h2 class="text-center text-warning p-4">Categories</h2>
       <div class="row">
         <div
@@ -30,20 +33,34 @@ export default {
       category: this.$route.params.category,
       categories: [],
       products: [],
+      hasError: false, // حالة لتتبع ما إذا كان هناك خطأ أم لا
     };
   },
   async created() {
     await this.loadProducts();
-    this.categories = await fetchCategories();
+    await this.loadCategories();
   },
   watch: {
     "$route.params.category": "loadProducts",
   },
   methods: {
     async loadProducts() {
-      this.products = await fetchProductsByCategory(
-        this.$route.params.category
-      );
+      try {
+        this.products = await fetchProductsByCategory(
+          this.$route.params.category
+        );
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        this.hasError = true; // تعيين حالة الخطأ إلى true عند حدوث خطأ
+      }
+    },
+    async loadCategories() {
+      try {
+        this.categories = await fetchCategories();
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        this.hasError = true; // تعيين حالة الخطأ إلى true عند حدوث خطأ
+      }
     },
   },
 };
@@ -66,16 +83,18 @@ export default {
 .category::before {
   content: "";
   position: absolute;
-  background-image: url("../assets/Images/Header\ 2.jpg");
+  background-image: url("../assets/Images/Header 2.jpg");
   background-size: cover;
   background-position: center;
   inset: 0;
   opacity: 0.2;
 }
+
 h2 {
   isolation: isolate;
   margin: 40px;
 }
+
 .category-btn {
   padding-top: 80px;
   width: 240px;
@@ -86,8 +105,13 @@ h2 {
   font-size: 20px;
   isolation: isolate;
 }
+
 .category-btn:hover {
   cursor: pointer;
   background-color: #c7ac12b2;
+}
+
+.alert {
+  margin-top: 20px;
 }
 </style>
