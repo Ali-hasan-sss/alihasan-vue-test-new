@@ -1,0 +1,10 @@
+# تجاهل ملفات النظام
+.DS_Store
+Thumbs.db
+# تجاهل ملفات بيئة العمل
+node_modules/
+.env
+.idea/
+.vscode/
+.log
+*.lock

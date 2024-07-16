@@ -25,7 +25,7 @@
 <script>
 import Footer from "@/components/footer.vue";
 import NavBar from "../components/Navbar.vue";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "LogIn",
@@ -45,12 +45,10 @@ export default {
         return;
       }
       try {
-        const response =
-          await /* axios.post */ ("https://fakestoreapi.com/api/regester",
-          {
-            email: this.email,
-            password: this.password,
-          });
+        const response = await axios.post("http://127.0.0.1:8000/api/login", {
+          email: this.email,
+          password: this.password,
+        });
         console.log("logein is done", response.data);
         localStorage.setItem("email", this.email);
         this.$router.push("/");
@@ -123,5 +121,9 @@ button {
 
 button:hover {
   background-color: #fde044b2;
+}
+.error {
+  margin-top: 1em;
+  color: red;
 }
 </style>

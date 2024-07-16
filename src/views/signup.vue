@@ -36,7 +36,7 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/footer.vue";
 
@@ -67,14 +67,15 @@ export default {
         return;
       }
       try {
-        const response =
-          await /* axios.post */ ("https://fakestoreapi.com/api/regester",
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/register",
           {
             name: this.name,
             email: this.email,
             password: this.password,
             password_confirmation: this.confirmPassword,
-          });
+          }
+        );
         console.log("regester is done", response.data);
         localStorage.setItem("email", this.email);
         this.$router.push("/");
