@@ -55,6 +55,8 @@ export default {
       } catch (err) {
         if (err.response && err.response.status === 422) {
           this.error = "Email or Password is wrong";
+        } else if (err.response && err.response.status === 401) {
+          this.error = "you are not registered";
         } else {
           this.error = "error please try again later";
         }

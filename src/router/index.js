@@ -5,6 +5,7 @@ import Product from "../views/Product.vue";
 import CartView from "../views/Cart.vue";
 import LogIn from "../views/login.vue";
 import SignUp from "../views/signup.vue";
+import DashBoard from "../views/dashboard.vue";
 
 const routes = [
   { path: "/", component: hoMe },
@@ -15,6 +16,10 @@ const routes = [
   {
     path: "/cart",
     component: CartView,
+  },
+  {
+    path: "/dashboard",
+    component: DashBoard,
   },
 ];
 
